@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package cloudstorage;
+
+service CloudStorageService {
+  rpc UploadFile (UploadRequest) returns (UploadResponse) {}
+  rpc DownloadFile (DownloadRequest) returns (DownloadResponse) {}
+  rpc DeleteFile (DeleteRequest) returns (DeleteResponse) {}
+  rpc ListFiles (ListFilesRequest) returns (ListFilesResponse) {}
+}
+
+message UploadRequest {
+  string filename = 1;
+  bytes file_content = 2;
+}
+
+message UploadResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DownloadRequest {
+  string filename = 1;
+}
+
+message DownloadResponse {
+  bool success = 1;
+  bytes file_content = 2;
+  string message = 3;
+}
+
+message DeleteRequest {
+  string filename = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ListFilesRequest {}
+
+message ListFilesResponse {
+  repeated string files = 1;
+}
